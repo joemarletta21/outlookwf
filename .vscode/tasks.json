@@ -1,0 +1,15 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Init DB",
+      "type": "shell",
+      "command": "python -m db.util --init --db data/pst.db"
+    },
+    {
+      "label": "Run Tests",
+      "type": "shell",
+      "command": "pytest -q"
+    }
+  ]
+}

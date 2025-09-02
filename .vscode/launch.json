@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Ingest PST",
+      "type": "python",
+      "request": "launch",
+      "module": "ingest.pst_extract",
+      "args": [
+        "--pst", "Outlook for Mac Archive.pst",
+        "--db", "data/pst.db",
+        "--checkpoint", "data/checkpoints/state.json"
+      ]
+    },
+    {
+      "name": "Search CLI",
+      "type": "python",
+      "request": "launch",
+      "module": "cli.search",
+      "args": ["--db", "data/pst.db", "--q", "invoice"]
+    }
+  ]
+}

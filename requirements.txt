@@ -1,0 +1,15 @@
+click>=8.1.7
+pyyaml>=6.0.2
+jinja2>=3.1.4
+rich>=13.7.1
+python-dateutil>=2.9.0.post0
+beautifulsoup4>=4.12.3
+chardet>=5.2.0
+email-validator>=2.2.0
+pdfkit>=1.0.0
+faiss-cpu>=1.8.0.post1 # optional, controlled by config
+sentence-transformers>=3.0.1 # optional, controlled by config
+spacy>=3.7.5 # optional; we also provide regex fallback
+pypff-python>=0.8.2; platform_system=="Windows" # Windows-only path A
+duckdb>=1.0.0 # optional alternative DB
+pytest>=8.3.2

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% set title = 'Compliance Timeline: ' ~ account %}
+{% block content %}
+<h2>Chronological Events</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Sent</th>
+      <th>From</th>
+      <th>Subject</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for it in items %}
+    <tr>
+      <td>{{ it['sent_at'] or '' }}</td>
+      <td>{{ it['sender_email'] or '' }}</td>
+      <td>{{ it['subject'] or '' }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% set title = 'Account Dossier: ' ~ account %}
+{% block content %}
+<h2>Recent Messages</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Sent</th>
+      <th>From</th>
+      <th>Subject</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for m in messages %}
+    <tr>
+      <td>{{ m['sent_at'] or '' }}</td>
+      <td>{{ m['sender_email'] or '' }}</td>
+      <td>{{ m['subject'] or '' }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+  </table>
+{% endblock %}

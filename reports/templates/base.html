@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title or 'Report' }}</title>
+    <style>
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 2rem; }
+      header { margin-bottom: 1rem; }
+      h1, h2 { margin: 0.2rem 0; }
+      table { border-collapse: collapse; width: 100%; }
+      th, td { border: 1px solid #ddd; padding: 8px; }
+      th { background: #f4f4f4; text-align: left; }
+      .muted { color: #666; font-size: 0.9em; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>{{ title or 'Report' }}</h1>
+      {% if subtitle %}<div class="muted">{{ subtitle }}</div>{% endif %}
+    </header>
+    {% block content %}{% endblock %}
+  </body>
+</html>

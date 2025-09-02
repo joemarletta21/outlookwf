@@ -1,0 +1,73 @@
+# Toggle semantic/embeddings. No external calls; model runs locally if installed.
+semantic:
+  enabled: false
+  model_name: sentence-transformers/all-MiniLM-L6-v2
+  faiss_index: data/semantic/faiss.index
+
+# Global tagging options
+tagging:
+  domains_weight: 2
+  keyword_weight: 1
+  override_wins: true
+
+# Define 10 accounts with partners. Adjust placeholders.
+accounts:
+  - name: Acme Corp
+    aliases: ["acme", "acme corp", "acme inc"]
+    domains: ["acme.com"]
+    partners: ["Contoso", "Globex"]
+    keywords: ["RFP", "renewal", "contract"]
+  - name: Contoso Ltd
+    aliases: ["contoso"]
+    domains: ["contoso.com"]
+    partners: ["Acme Corp"]
+    keywords: ["SOW", "pilot", "PO"]
+  - name: Globex
+    aliases: ["globex"]
+    domains: ["globex.com"]
+    partners: ["Initech"]
+    keywords: ["invoice", "escalation"]
+  - name: Initech
+    aliases: ["initech"]
+    domains: ["initech.com"]
+    partners: ["Globex", "Umbrella"]
+    keywords: ["NDA", "MSA"]
+  - name: Umbrella
+    aliases: ["umbrella"]
+    domains: ["umbrella.com"]
+    partners: ["Initech"]
+    keywords: ["security", "audit"]
+  - name: Hooli
+    aliases: ["hooli"]
+    domains: ["hooli.com"]
+    partners: ["Pied Piper"]
+    keywords: ["migration", "pricing"]
+  - name: Pied Piper
+    aliases: ["pied piper", "piper"]
+    domains: ["piedpiper.com"]
+    partners: ["Hooli"]
+    keywords: ["compression", "beta"]
+  - name: Soylent
+    aliases: ["soylent"]
+    domains: ["soylent.com"]
+    partners: ["Acme Corp"]
+    keywords: ["supply", "manufacturing"]
+  - name: Wayne Enterprises
+    aliases: ["wayne", "wayne enterprises"]
+    domains: ["wayne.com"]
+    partners: ["Stark Industries"]
+    keywords: ["capex", "compliance"]
+  - name: Stark Industries
+    aliases: ["stark"]
+    domains: ["stark.com"]
+    partners: ["Wayne Enterprises"]
+    keywords: ["defense", "R&D"]
+
+# Manual overrides: authoritative mapping by email address or pattern
+overrides:
+  addresses:
+    "ceo@acme.com": "Acme Corp"
+    "cfo@contoso.com": "Contoso Ltd"
+  subject_patterns:
+    - pattern: "(?i)acme.*escalation"
+      account: "Acme Corp"
