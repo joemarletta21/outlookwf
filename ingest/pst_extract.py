@@ -20,6 +20,7 @@ from db.util import connect, upsert_message, insert_attachment, tag_message, add
 from nlp.entities import extract_entities
 from nlp.embeddings import EmbeddingIndexer
 from dateutil import parser as dateparse
+from ingest.omx_convert import ingest_outlook_mac_dir
 
 
 def safe_decode(s: Optional[str]) -> str:
@@ -548,7 +549,18 @@ def main():
     if is_zip_archive(args.pst):
         print("Detected Zip archive. Unzipping and parsing EML...")
         eml_root = unzip_archive(args.pst, os.path.join('data', 'eml_unzip'))
+        # First, try EML/MBOX/EMLX
         ingest_from_eml_dir(eml_root, conn, cfg, args.checkpoint)
+        # If no messages were created, attempt Outlook Mac XML conversion
+        try:
+            cur = conn.execute("SELECT COUNT(*) FROM messages")
+            n = int(cur.fetchone()[0])
+        except Exception:
+            n = 0
+        if n == 0:
+            print("No EML/MBOX found. Attempting Outlook Mac XML conversion...")
+            created = ingest_outlook_mac_dir(eml_root, conn, cfg, args.checkpoint)
+            print(f"Converted {created} messages from Outlook Mac XML.")
     elif use_pypff:
         print("Using pypff path.")
         ingest_with_pypff(args.pst, conn, cfg, args.checkpoint)
